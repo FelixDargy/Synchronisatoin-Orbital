@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cxvh75rs6vlvt"]
+
+[ext_resource type="Script" uid="uid://cfflhhia7hklg" path="res://jupiter.gd" id="1_si51w"]
+[ext_resource type="Script" uid="uid://bwbiwpmxax3p1" path="res://europe.gd" id="2_i0uay"]
+
+[sub_resource type="Environment" id="Environment_i0uay"]
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="Environment" id="Environment_si51w"]
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ww3y"]
+albedo_color = Color(0.78431374, 0.54509807, 0.22745098, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w0awe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w302u"]
+albedo_color = Color(0.81960785, 0.654902, 0.49803922, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ff0n0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_si51w"]
+albedo_color = Color(0.7490196, 0.8117647, 0.8509804, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6163m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pukkf"]
+albedo_color = Color(0.7490196, 0.8117647, 0.8509804, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_56vp6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_si51w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0uay"]
+albedo_color = Color(0.99215686, 0.72156864, 0.07450981, 1)
+emission_enabled = true
+emission = Color(0.99215686, 0.72156864, 0.07450981, 1)
+
+[node name="Node3D" type="Node3D" unique_id=1886361644]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=397671568]
+environment = SubResource("Environment_i0uay")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=208181114]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 20, 60)
+environment = SubResource("Environment_si51w")
+
+[node name="jupiter" type="RigidBody3D" parent="." unique_id=525856085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.1068, 0, 0)
+script = ExtResource("1_si51w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter" unique_id=1331066374]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2ww3y")
+mesh = SubResource("SphereMesh_w0awe")
+surface_material_override/0 = SubResource("StandardMaterial3D_w302u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter" unique_id=519150255]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("SphereShape3D_ff0n0")
+
+[node name="Europe" type="RigidBody3D" parent="." unique_id=1490571335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.970478, 0, -7.982258)
+script = ExtResource("2_i0uay")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Europe" unique_id=1603541276]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
+material_override = SubResource("StandardMaterial3D_si51w")
+mesh = SubResource("SphereMesh_6163m")
+surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Europe" unique_id=1844976361]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
+shape = SubResource("SphereShape3D_56vp6")
+
+[node name="soleil" type="Node3D" parent="." unique_id=856686611]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="soleil" unique_id=260272131]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+mesh = SubResource("SphereMesh_si51w")
+surface_material_override/0 = SubResource("StandardMaterial3D_i0uay")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="soleil" unique_id=1357980916]
+light_color = Color(1, 0.95686275, 0.8784314, 1)
+omni_range = 4096.0
+omni_attenuation = 0.0
