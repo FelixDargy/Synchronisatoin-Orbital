@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cxvh75rs6vlvt"]
 
-[ext_resource type="Script" uid="uid://cfflhhia7hklg" path="res://jupiter.gd" id="1_si51w"]
 [ext_resource type="Script" uid="uid://bwbiwpmxax3p1" path="res://europe.gd" id="2_i0uay"]
 
 [sub_resource type="Environment" id="Environment_i0uay"]
@@ -49,7 +48,6 @@ environment = SubResource("Environment_si51w")
 
 [node name="jupiter" type="RigidBody3D" parent="." unique_id=525856085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.1068, 0, 0)
-script = ExtResource("1_si51w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter" unique_id=1331066374]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
