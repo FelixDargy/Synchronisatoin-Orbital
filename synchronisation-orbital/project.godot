@@ -11,12 +11,8 @@ config_version=5
 [application]
 
 config/name="synchronisation orbital"
-<<<<<<< HEAD
-config/features=PackedStringArray("4.6", "Forward Plus")
-=======
 run/main_scene="uid://cxvh75rs6vlvt"
-config/features=PackedStringArray("4.5", "Forward Plus")
->>>>>>> 1f47c914f07b8d3576e6533096045179b7280c5a
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [physics]
