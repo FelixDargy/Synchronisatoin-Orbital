@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://y5em8nnyw62k"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" uid="uid://cip060hbqii" path="res://h_slider.gd" id="1_xodjk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lq5x"]
+bg_color = Color(0.7347555, 1.1889392, 1.2727884, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhkvj"]
+bg_color = Color(0.8932352, 0.4719134, 0.070285, 1)
+border_width_left = 100
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="Interface" type="Control" unique_id=462005231]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -8,25 +20,79 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Vbox" type="VBoxContainer" parent="." unique_id=301975546]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="Titre" type="PanelContainer" parent="Vbox" unique_id=587693925]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6lq5x")
+
+[node name="MarginContainer" type="MarginContainer" parent="Vbox/Titre" unique_id=140551961]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Vbox/Titre/MarginContainer" unique_id=342717377]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+[node name="Titre" type="Label" parent="Vbox/Titre/MarginContainer/HBoxContainer" unique_id=1120191265]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 20
+text = "Synchronisation Orbital de Jupiter"
+
+[node name="Control" type="PanelContainer" parent="Vbox" unique_id=273026047]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Vbox/Control" unique_id=1082054834]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Vbox/Control/MarginContainer2" unique_id=1293838178]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Vbox/Control/MarginContainer2/HBoxContainer" unique_id=425465583]
+layout_mode = 2
+text = "Vitesse de simulation:"
+
+[node name="VSeparator" type="VSeparator" parent="Vbox/Control/MarginContainer2/HBoxContainer" unique_id=2105457416]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="Vbox/Control/MarginContainer2/HBoxContainer" unique_id=1423614772]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_dhkvj")
+script = ExtResource("1_xodjk")
+
+[node name="Affichage" type="PanelContainer" parent="Vbox" unique_id=919822267]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Vbox/Affichage" unique_id=946290034]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Vbox/Affichage/MarginContainer" unique_id=2028592539]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=1037922151]
+layout_mode = 2
+text = "Point le plus proche de Jupiter:"
+
+[node name="pts + proche" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=1866722216]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=407336385]
+layout_mode = 2
+text = "Distance entre les deux points d'Europe:"
+
+[node name="Label3" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=705858256]
 layout_mode = 2
