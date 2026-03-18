@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @export var centre_rotation : RigidBody3D
-@export var lune: RigidBody3D
+
 # Jupiter
 var masse_jupiter: float = 1.989e27  # kg
 
@@ -32,7 +32,7 @@ var masse_jupiter: float = 1.989e27  # kg
 var G : float = 6.673e-11
 var periode : float
 var masse: float
-var temps_ecoule : float = 0.0
+
 var r1: Vector3
 var r2: Vector3
 var r1_2: Vector3
@@ -80,20 +80,29 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	appliquer_euler(delta)
-	lune.global_position = centre_rotation.global_position + conv_position_reelle_a_simulee(r1)
-	global_position = centre_rotation.global_position + conv_position_reelle_a_simulee(r2)
+	
+	global_position = centre_rotation.global_position + conv_position_reelle_a_simulee(r1)
 func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	var distance_reelle = position_reelle.length()
 	if distance_reelle == 0:
 		return Vector3.ZERO
 	var ratio_distance = inverse_lerp(min_distance_reelle, max_distance_reelle, distance_reelle)
-	
 	var facteur_distance_simulee = lerp(min_distance_simulee, max_distance_simulee, ratio_distance)
 	return position_reelle.normalized() * facteur_distance_simulee
 func appliquer_euler(temps_dernier_ecran : float) -> void:
 	var nb_periode = temps_dernier_ecran * periode / periode_relative
 	var h = nb_periode / etapes_calcul_par_ecran
 	for i in range(etapes_calcul_par_ecran):
+		var r_1_plus_1 = r1 + h * v1
+		var v_1_plus_1 = v1 + h * a1
+		var r_2_plus_1 = r2 + h * v2
+		var v_2_plus_1 = v2 + h * a2
+		
+		r1 = r_1_plus_1
+		v1 = v_1_plus_1
+		r2 = r_2_plus_1
+		v2 = v_2_plus_1
+		r1_2= r2-r1
 		f_g1 = -G*((masse*masse_jupiter)/r1.length()**3)*r1
 		f_g2 = -G*((masse*masse_jupiter)/r2.length()**3)*r2
 		fres_1= elasticite_Europe*(r1_2.length()-distance_equilibre)*r1_2.normalized()
@@ -102,11 +111,3 @@ func appliquer_euler(temps_dernier_ecran : float) -> void:
 		ffrot_2= -ffrot_1
 		a1=(f_g1+fres_1+ffrot_1)/masse
 		a2=(f_g2+fres_2+ffrot_2)/masse
-		var v_1_plus_1 = v1 + h * a1
-		var v_2_plus_1 = v2 + h * a2
-		v1 = v_1_plus_1
-		v2 = v_2_plus_1
-		r1 = r1+h*v1
-		r2 = r2+h*v2
-		r1_2= r2-r1
-		

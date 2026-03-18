@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxvh75rs6vlvt"]
+[gd_scene format=3 uid="uid://cxvh75rs6vlvt"]
 
 [ext_resource type="Script" uid="uid://bwbiwpmxax3p1" path="res://europe.gd" id="2_i0uay"]
 
@@ -30,71 +30,67 @@ albedo_color = Color(0.7490196, 0.8117647, 0.8509804, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_56vp6"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_si51w"]
+[node name="Node3D" type="Node3D" unique_id=1323886312]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0uay"]
-albedo_color = Color(0.99215686, 0.72156864, 0.07450981, 1)
-emission_enabled = true
-emission = Color(0.99215686, 0.72156864, 0.07450981, 1)
-
-[node name="Node3D" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=629111393]
 environment = SubResource("Environment_i0uay")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 20, 60)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1957134866]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 88.65616, 0)
 environment = SubResource("Environment_si51w")
 
-[node name="jupiter" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.1068, 0, 0)
+[node name="jupiter" type="RigidBody3D" parent="." unique_id=2002215741]
+freeze = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter" unique_id=2105853926]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2ww3y")
 mesh = SubResource("SphereMesh_w0awe")
 surface_material_override/0 = SubResource("StandardMaterial3D_w302u")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter" unique_id=1090889654]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("SphereShape3D_ff0n0")
 
-[node name="Europe_1" type="RigidBody3D" parent="jupiter"]
+[node name="Europe_1" type="RigidBody3D" parent="jupiter" unique_id=499855556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1363182, 0, -7.982258)
-script = ExtResource("2_i0uay")
+can_sleep = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_1" unique_id=829341062]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
 material_override = SubResource("StandardMaterial3D_si51w")
 mesh = SubResource("SphereMesh_6163m")
 surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter/Europe_1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter/Europe_1" unique_id=1413753580]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
 shape = SubResource("SphereShape3D_56vp6")
 
-[node name="Europe_2" type="RigidBody3D" parent="jupiter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1363182, 0, -7.982258)
+[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("centre_rotation", "lune")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0, 7.98)
+can_sleep = false
 script = ExtResource("2_i0uay")
+centre_rotation = NodePath("..")
+lune = NodePath("../Europe_1")
+etapes_calcul_par_ecran = 10000
+min_distance_simulee = 12.0
+max_distance_simulee = 50.0
+min_distance_reelle = 400000000.0
+max_distance_reelle = 2000000000.0
+periode_relative = 10.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_2"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_2" unique_id=451138490]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13, 0, 7.98)
 material_override = SubResource("StandardMaterial3D_si51w")
 mesh = SubResource("SphereMesh_6163m")
 surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter/Europe_2"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter/Europe_2" unique_id=436487864]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13, 0, 7.98)
 shape = SubResource("SphereShape3D_56vp6")
 
-[node name="soleil" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="soleil"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
-mesh = SubResource("SphereMesh_si51w")
-surface_material_override/0 = SubResource("StandardMaterial3D_i0uay")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="soleil"]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=393077861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42, 0)
 light_color = Color(1, 0.95686275, 0.8784314, 1)
 omni_range = 4096.0
 omni_attenuation = 0.0
