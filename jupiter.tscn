@@ -36,24 +36,23 @@ albedo_color = Color(0.7490196, 0.8117647, 0.8509804, 1)
 environment = SubResource("Environment_i0uay")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1957134866]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 88.65616, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 190, 0)
 environment = SubResource("Environment_si51w")
 
 [node name="jupiter" type="RigidBody3D" parent="." unique_id=2002215741]
 freeze = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter" unique_id=2105853926]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2ww3y")
 mesh = SubResource("SphereMesh_w0awe")
 surface_material_override/0 = SubResource("StandardMaterial3D_w302u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jupiter" unique_id=1090889654]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 shape = SubResource("SphereShape3D_ff0n0")
 
 [node name="Europe_1" type="RigidBody3D" parent="jupiter" unique_id=499855556]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1363182, 0, -7.982258)
 can_sleep = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_1" unique_id=829341062]
@@ -66,17 +65,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
 shape = SubResource("SphereShape3D_56vp6")
 
-[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("centre_rotation", "lune")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0, 7.98)
+[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("lune")]
 can_sleep = false
 script = ExtResource("2_i0uay")
-centre_rotation = NodePath("..")
 lune = NodePath("../Europe_1")
-etapes_calcul_par_ecran = 10000
-min_distance_simulee = 12.0
-max_distance_simulee = 50.0
-min_distance_reelle = 400000000.0
-max_distance_reelle = 2000000000.0
+etapes_calcul_par_ecran = 1000
+min_distance_simulee = 40.0
+max_distance_simulee = 80.0
+min_distance_reelle = 640000000.0
+max_distance_reelle = 700000000.0
 periode_relative = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_2" unique_id=451138490]
