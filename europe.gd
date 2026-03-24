@@ -3,6 +3,7 @@ extends RigidBody3D
 class_name lunes
 #
 @export var lune: RigidBody3D
+@export var interface: Interface
 
 # constante fournie en lien avec Jupiter
 const masse_jupiter: float = 1.989e27  # kg
@@ -32,7 +33,6 @@ const coefficient_dissipation: float = 4e16
 
 #variable ajustable dans l'Inspecteur pour la période orbitale des lunes
 @export_group("Paramètre de simulation")
-@export var periode_relative : float
 
 const G : float = 6.673e-11
 var masse: float
@@ -46,6 +46,8 @@ var v1: Vector3
 var v2: Vector3
 var a1: Vector3
 var a2: Vector3
+
+
 
 var f_g1: Vector3
 var f_g2: Vector3
@@ -65,37 +67,52 @@ func _ready() -> void:
 	et bien positionnée
 	Toutes les formules ont été fournies dans l'énoncé pour le projet de synchronisation orbitale
 	""" 
-	masse= masse_europe/2
 	
-	r1= Vector3(periapside-(distance_equilibre/2.0),0,0)
-	r2= Vector3(periapside+(distance_equilibre/2.0),0,0)
-	r2_1= r2-r1
+
 	
-	v1= Vector3(0,0,(vitesse_periapside*3.0/4.0))
-	v2= Vector3(0,0,(vitesse_periapside*5.0/4.0))
-	
+	masse = masse_europe / 2
+	interface.slider_vitesse.value = 10
+
+	r1 = Vector3(periapside-(distance_equilibre/2.0),0,0)
+	r2 = Vector3(periapside+(distance_equilibre/2.0),0,0)
+	r2_1 = r2-r1
+
+	v1 = Vector3(0,0,(vitesse_periapside*3.0/4.0))
+	v2 = Vector3(0,0,(vitesse_periapside*5.0/4.0))
+
 	f_g1 = -G*((masse*masse_jupiter)/(r1.length()**3))*r1
 	f_g2 = -G*((masse*masse_jupiter)/(r2.length()**3))*r2
-	
-	fres_1= elasticite_Europe*(r2_1.length()-distance_equilibre)*r2_1.normalized()
-	fres_2=-fres_1
-	
-	ffrot_1= coefficient_dissipation*(v2-v1)
-	ffrot_2= -ffrot_1
-	
-	a1=(f_g1+fres_1+ffrot_1)/masse
-	a2=(f_g2+fres_2+ffrot_2)/masse
-	
+
+	fres_1 = elasticite_Europe*(r2_1.length()-distance_equilibre)*r2_1.normalized()
+	fres_2 = -fres_1
+
+	ffrot_1 = coefficient_dissipation*(v2-v1)
+	ffrot_2 = -ffrot_1
+
+	a1 = (f_g1+fres_1+ffrot_1)/masse
+	a2 = (f_g2+fres_2+ffrot_2)/masse
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#initialiser pour que le programme s'arrête après 20 périodes comme sugérer dans l'énoncé
+	if interface == null or interface.slider_vitesse == null:
+		return
+
+	var periode_relative := interface.slider_vitesse.value
+
 	temps_ecoule += delta * (periode_orbitale / periode_relative)
 	if temps_ecoule >= 20.0 * periode_orbitale:
 		return
-	#appeler les fonctions déjà créer pour quelles soit appelées à chaque delta
+
 	appliquer_euler(delta)
 	global_position = conv_position_reelle_a_simulee(r2)
 	lune.global_position = conv_position_reelle_a_simulee(r1)
+
+	var distance_lunes = r1.distance_to(r2)
+	interface.afficher_distance(distance_lunes)
+
+	if r1.length() < r2.length():
+		interface.afficher_plus_proche("Europe_1")
+	else:
+		interface.afficher_plus_proche("Europe_2")
 
 func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	"""
@@ -112,7 +129,7 @@ func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	var facteur_distance_simulee = lerp(min_distance_simulee, max_distance_simulee, ratio_distance)
 	return position_reelle.normalized() * facteur_distance_simulee
 func appliquer_euler(temps_dernier_ecran : float) -> void:
-	
+	var periode_relative := interface.slider_vitesse.value
 	var nb_periode = temps_dernier_ecran * periode_orbitale / periode_relative
 	var h = nb_periode / etapes_calcul_par_ecran
 	

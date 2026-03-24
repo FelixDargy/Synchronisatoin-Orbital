@@ -67,11 +67,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
 shape = SubResource("SphereShape3D_56vp6")
 
-[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("lune")]
+[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("lune", "interface")]
 can_sleep = false
 freeze = true
 script = ExtResource("2_i0uay")
 lune = NodePath("../Europe_1")
+interface = NodePath("../../Interface")
 etapes_calcul_par_ecran = 5000
 min_distance_simulee = 50.0
 max_distance_simulee = 100.0
@@ -95,10 +96,3 @@ omni_range = 4096.0
 omni_attenuation = 0.0
 
 [node name="Interface" parent="." unique_id=462005231 instance=ExtResource("2_si51w")]
-
-[node name="HSlider" parent="Interface/Vbox/Control/MarginContainer2/HBoxContainer" parent_id_path=PackedInt32Array(462005231, 1293838178) index="2" unique_id=1423614772]
-min_value = 1.0
-max_value = 50.0
-tick_count = 1
-
-[editable path="Interface"]

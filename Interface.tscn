@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://y5em8nnyw62k"]
 
+[ext_resource type="Script" uid="uid://c5lh1uu8bj1t3" path="res://interface.gd" id="1_6lq5x"]
 [ext_resource type="Script" uid="uid://cip060hbqii" path="res://h_slider.gd" id="1_xodjk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lq5x"]
@@ -12,13 +13,16 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="Interface" type="Control" unique_id=462005231]
+[node name="Interface" type="Control" unique_id=462005231 node_paths=PackedStringArray("label_pts_proche", "label_distance")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6lq5x")
+label_pts_proche = NodePath("Vbox/Affichage/MarginContainer/GridContainer/pts + proche")
+label_distance = NodePath("Vbox/Affichage/MarginContainer/GridContainer/Label3")
 
 [node name="Vbox" type="VBoxContainer" parent="." unique_id=301975546]
 layout_mode = 0
@@ -69,6 +73,7 @@ layout_mode = 2
 [node name="HSlider" type="HSlider" parent="Vbox/Control/MarginContainer2/HBoxContainer" unique_id=1423614772]
 layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxFlat_dhkvj")
+value = 10.0
 script = ExtResource("1_xodjk")
 
 [node name="Affichage" type="PanelContainer" parent="Vbox" unique_id=919822267]
