@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+class_name lunes
 #
 @export var lune: RigidBody3D
 
@@ -34,13 +35,13 @@ const coefficient_dissipation: float = 4e16
 @export var periode_relative : float
 
 const G : float = 6.673e-11
-const masse: float= masse_europe/2
+var masse: float
 
 # Initialisation des variables qui vont changer tout au long de la simulation
 
 var r1: Vector3
 var r2: Vector3
-var r1_2: Vector3
+var r2_1: Vector3
 var v1: Vector3
 var v2: Vector3
 var a1: Vector3
@@ -62,21 +63,21 @@ func _ready() -> void:
 	dans la fonction ready car celle-ci s'éxécute avant le commencement 
 	de la simulation pour que les lunes commencent avec la bonne vitesse
 	et bien positionnée
+	Toutes les formules ont été fournies dans l'énoncé pour le projet de synchronisation orbitale
 	""" 
-
-	
+	masse= masse_europe/2
 	
 	r1= Vector3(periapside-(distance_equilibre/2.0),0,0)
 	r2= Vector3(periapside+(distance_equilibre/2.0),0,0)
-	r1_2= r2-r1
+	r2_1= r2-r1
 	
-	v1= Vector3(0,0,3.0/4.0*vitesse_periapside)
-	v2= Vector3(0,0,5.0/4.0*vitesse_periapside)
+	v1= Vector3(0,0,(vitesse_periapside*3.0/4.0))
+	v2= Vector3(0,0,(vitesse_periapside*5.0/4.0))
 	
-	f_g1 = -G*((masse*masse_jupiter)/r1.length()**3)*r1
-	f_g2 = -G*((masse*masse_jupiter)/r2.length()**3)*r2
+	f_g1 = -G*((masse*masse_jupiter)/(r1.length()**3))*r1
+	f_g2 = -G*((masse*masse_jupiter)/(r2.length()**3))*r2
 	
-	fres_1= elasticite_Europe*(r1_2.length()-distance_equilibre)*r1_2.normalized()
+	fres_1= elasticite_Europe*(r2_1.length()-distance_equilibre)*r2_1.normalized()
 	fres_2=-fres_1
 	
 	ffrot_1= coefficient_dissipation*(v2-v1)
@@ -87,15 +88,22 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#initialiser pour que le programme s'arrête après 20 périodes comme sugérer dans l'énoncé
 	temps_ecoule += delta * (periode_orbitale / periode_relative)
 	if temps_ecoule >= 20.0 * periode_orbitale:
 		return
-	
+	#appeler les fonctions déjà créer pour quelles soit appelées à chaque delta
 	appliquer_euler(delta)
-	lune.global_position = conv_position_reelle_a_simulee(r1)
 	global_position = conv_position_reelle_a_simulee(r2)
+	lune.global_position = conv_position_reelle_a_simulee(r1)
 
 func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
+	"""
+	La fonction sert à transformer les valeurs réelles de distance entre les 
+	astres à des valeurs beaucoup plus petites et fictives qui permettent d'observer 
+	à une échelle résonnable la simulation
+	
+	"""
 	var distance_reelle = position_reelle.length()
 	if distance_reelle == 0:
 		return Vector3.ZERO
@@ -109,18 +117,25 @@ func appliquer_euler(temps_dernier_ecran : float) -> void:
 	var h = nb_periode / etapes_calcul_par_ecran
 	
 	for i in range(etapes_calcul_par_ecran):
-		r1_2 = r2 - r1
-		f_g1 = -G*((masse*masse_jupiter)/r1.length()**3)*r1
-		f_g2 = -G*((masse*masse_jupiter)/r2.length()**3)*r2
-		fres_1 = elasticite_Europe*(r1_2.length()-distance_equilibre)*r1_2.normalized()
+		# 1. Forces avec positions ACTUELLES
+		r2_1 = r2 - r1
+		f_g1 = -G*(masse*masse_jupiter/(r1.length()**3))*r1
+		f_g2 = -G*(masse*masse_jupiter/(r2.length()**3))*r2
+		fres_1 = elasticite_Europe*(r2_1.length()-distance_equilibre)*r2_1.normalized()
 		fres_2 = -fres_1
 		ffrot_1 = coefficient_dissipation*(v2-v1)
 		ffrot_2 = -ffrot_1
 		a1 = (f_g1+fres_1+ffrot_1)/masse
 		a2 = (f_g2+fres_2+ffrot_2)/masse
 
-# 2. Euler symplectique
+		# 2. Euler symplectique
 		v1 = v1 + h * a1
 		v2 = v2 + h * a2
 		r1 = r1 + h * v1
 		r2 = r2 + h * v2
+func position_entre_lunes() -> Vector3:
+	return r2_1
+func position_r1() -> Vector3:
+	return r1
+func position_r2() -> Vector3:
+	return r2

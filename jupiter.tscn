@@ -54,6 +54,7 @@ shape = SubResource("SphereShape3D_ff0n0")
 
 [node name="Europe_1" type="RigidBody3D" parent="jupiter" unique_id=499855556]
 can_sleep = false
+freeze = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_1" unique_id=829341062]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
@@ -67,11 +68,12 @@ shape = SubResource("SphereShape3D_56vp6")
 
 [node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("lune")]
 can_sleep = false
+freeze = true
 script = ExtResource("2_i0uay")
 lune = NodePath("../Europe_1")
-etapes_calcul_par_ecran = 1000
-min_distance_simulee = 40.0
-max_distance_simulee = 80.0
+etapes_calcul_par_ecran = 5000
+min_distance_simulee = 50.0
+max_distance_simulee = 100.0
 min_distance_reelle = 640000000.0
 max_distance_reelle = 700000000.0
 periode_relative = 10.0
