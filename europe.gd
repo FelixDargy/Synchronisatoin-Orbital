@@ -95,11 +95,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	vitesse_simulation = interface.slide_value()
 	print(vitesse_simulation)
-	temps_ecoule += delta * (vitesse_simulation)
+	temps_ecoule += delta * (periode_orbitale/periode_relative)
 	if temps_ecoule >= 20.0 * periode_orbitale:
 		return
 
-	appliquer_euler(delta,vitesse_simulation)
+	appliquer_euler(delta*vitesse_simulation)
 	global_position = conv_position_reelle_a_simulee(r2)
 	lune.global_position = conv_position_reelle_a_simulee(r1)
 
@@ -119,8 +119,8 @@ func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	
 	var facteur_distance_simulee = lerp(min_distance_simulee, max_distance_simulee, ratio_distance)
 	return position_reelle.normalized() * facteur_distance_simulee
-func appliquer_euler(temps_dernier_ecran : float, vitesse_simu:float) -> void:
-	var nb_periode = temps_dernier_ecran * vitesse_simu
+func appliquer_euler(temps_dernier_ecran : float) -> void:
+	var nb_periode = temps_dernier_ecran * (periode_orbitale/periode_relative)
 	var h = nb_periode / etapes_calcul_par_ecran
 	
 	for i in range(etapes_calcul_par_ecran):
