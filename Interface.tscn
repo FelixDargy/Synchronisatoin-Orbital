@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://y5em8nnyw62k"]
 
 [ext_resource type="Script" uid="uid://c5lh1uu8bj1t3" path="res://interface.gd" id="1_6lq5x"]
-[ext_resource type="Script" uid="uid://cip060hbqii" path="res://h_slider.gd" id="1_xodjk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lq5x"]
 bg_color = Color(0.7347555, 1.1889392, 1.2727884, 1)
@@ -75,7 +74,6 @@ layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxFlat_dhkvj")
 min_value = 1.0
 value = 10.0
-script = ExtResource("1_xodjk")
 
 [node name="Affichage" type="PanelContainer" parent="Vbox" unique_id=919822267]
 layout_mode = 2
