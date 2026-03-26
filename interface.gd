@@ -6,7 +6,7 @@ class_name Interface
 @export var lune : lunes
 var slider : float
 func _ready() -> void:
-	slider_vitesse.value = 10
+	slider_vitesse.value = 3
 	slider_vitesse.value_changed.connect(changement)
 
 func _process(_delta: float) -> void:

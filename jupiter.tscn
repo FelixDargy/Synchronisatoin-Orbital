@@ -54,9 +54,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_w302u")
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 shape = SubResource("SphereShape3D_ff0n0")
 
-[node name="Europe_1" type="RigidBody3D" parent="jupiter" unique_id=499855556]
+[node name="Europe_1" type="RigidBody3D" parent="jupiter" unique_id=499855556 node_paths=PackedStringArray("interface")]
 can_sleep = false
 freeze = true
+script = ExtResource("2_i0uay")
+interface = NodePath("../../Interface")
+etapes_calcul_par_ecran = 10000
+min_distance_simulee = 25.0
+max_distance_simulee = 100.0
+min_distance_reelle = 640000000.0
+max_distance_reelle = 700000000.0
+r1 = Vector3(652377000, 0, 0)
+r2 = Vector3(677347000, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_1" unique_id=829341062]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
@@ -68,17 +77,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pukkf")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -5.5)
 shape = SubResource("SphereShape3D_56vp6")
 
-[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("lune", "interface")]
+[node name="Europe_2" type="RigidBody3D" parent="jupiter" unique_id=727326005 node_paths=PackedStringArray("interface")]
 can_sleep = false
 freeze = true
 script = ExtResource("2_i0uay")
-lune = NodePath("../Europe_1")
 interface = NodePath("../../Interface")
-etapes_calcul_par_ecran = 5000
-min_distance_simulee = 50.0
+etapes_calcul_par_ecran = 10000
+min_distance_simulee = 25.0
 max_distance_simulee = 100.0
 min_distance_reelle = 640000000.0
 max_distance_reelle = 700000000.0
+r1 = Vector3(677347000, 0, 0)
+r2 = Vector3(652377000, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_2" unique_id=451138490]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13, 0, 7.98)
