@@ -67,11 +67,17 @@ func _ready() -> void:
 	et bien positionnée
 	Toutes les formules ont été fournies dans l'énoncé pour le projet de synchronisation orbitale
 	""" 
+	if interface == null:
+		push_error("Interface non assignée !")
+		return
 	
+	if interface.slider_vitesse == null:
+		push_error("Slider non assigné dans Interface !")
+		return
 
 	
 	masse = masse_europe / 2
-	interface.slider_vitesse.value = 10
+	
 
 	r1 = Vector3(periapside-(distance_equilibre/2.0),0,0)
 	r2 = Vector3(periapside+(distance_equilibre/2.0),0,0)

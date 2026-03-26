@@ -13,7 +13,7 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="Interface" type="Control" unique_id=462005231 node_paths=PackedStringArray("label_pts_proche", "label_distance")]
+[node name="Interface" type="Control" unique_id=462005231]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,8 +21,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6lq5x")
-label_pts_proche = NodePath("Vbox/Affichage/MarginContainer/GridContainer/pts + proche")
-label_distance = NodePath("Vbox/Affichage/MarginContainer/GridContainer/Label3")
 
 [node name="Vbox" type="VBoxContainer" parent="." unique_id=301975546]
 layout_mode = 0
@@ -92,12 +90,12 @@ columns = 2
 layout_mode = 2
 text = "Point le plus proche de Jupiter:"
 
-[node name="pts + proche" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=1866722216]
+[node name="le_plus_proche" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=1866722216]
 layout_mode = 2
 
 [node name="Label2" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=407336385]
 layout_mode = 2
 text = "Distance entre les deux points d'Europe:"
 
-[node name="Label3" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=705858256]
+[node name="distance" type="Label" parent="Vbox/Affichage/MarginContainer/GridContainer" unique_id=705858256]
 layout_mode = 2

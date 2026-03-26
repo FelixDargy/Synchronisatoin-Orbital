@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwbiwpmxax3p1" path="res://europe.gd" id="2_i0uay"]
 [ext_resource type="PackedScene" uid="uid://y5em8nnyw62k" path="res://Interface.tscn" id="2_si51w"]
+[ext_resource type="Script" uid="uid://4sb5w0v723pw" path="res://distance.gd" id="3_i0uay"]
 
 [sub_resource type="Environment" id="Environment_i0uay"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -100,5 +101,8 @@ omni_attenuation = 0.0
 min_value = 1.0
 max_value = 50.0
 tick_count = 1
+
+[node name="distance" parent="Interface/Vbox/Affichage/MarginContainer/GridContainer" parent_id_path=PackedInt32Array(462005231, 2028592539) index="3" unique_id=705858256]
+script = ExtResource("3_i0uay")
 
 [editable path="Interface"]
