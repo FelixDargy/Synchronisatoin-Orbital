@@ -34,6 +34,7 @@ const coefficient_dissipation: float = 4e16
 #variable ajustable dans l'Inspecteur pour la période orbitale des lunes
 @export_group("Paramètre de simulation")
 @export var periode_relative: float = 10
+var vitesse_simulation: float = 10
 const G : float = 6.673e-11
 var masse: float
 
@@ -47,7 +48,7 @@ var v2: Vector3
 var a1: Vector3
 var a2: Vector3
 
-var vitesse_simulation: float = interface.slider_value(10)
+
 
 var f_g1: Vector3
 var f_g2: Vector3
@@ -70,8 +71,8 @@ func _ready() -> void:
 	
 	masse = masse_europe / 2
 	
-	interface.slider_vitesse.value = 10
-
+	
+	
 	r1 = Vector3(periapside-(distance_equilibre/2.0),0,0)
 	r2 = Vector3(periapside+(distance_equilibre/2.0),0,0)
 	r2_1 = r2-r1
@@ -92,16 +93,13 @@ func _ready() -> void:
 	a2 = (f_g2+fres_2+ffrot_2)/masse
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if interface == null or interface.slider_vitesse == null:
-		return
-
-	
-
+	vitesse_simulation = interface.slide_value()
+	print(vitesse_simulation)
 	temps_ecoule += delta * (vitesse_simulation)
 	if temps_ecoule >= 20.0 * periode_orbitale:
 		return
 
-	appliquer_euler(delta)
+	appliquer_euler(delta,vitesse_simulation)
 	global_position = conv_position_reelle_a_simulee(r2)
 	lune.global_position = conv_position_reelle_a_simulee(r1)
 
@@ -121,9 +119,8 @@ func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	
 	var facteur_distance_simulee = lerp(min_distance_simulee, max_distance_simulee, ratio_distance)
 	return position_reelle.normalized() * facteur_distance_simulee
-func appliquer_euler(temps_dernier_ecran : float) -> void:
-	
-	var nb_periode = temps_dernier_ecran * vitesse_simulation
+func appliquer_euler(temps_dernier_ecran : float, vitesse_simu:float) -> void:
+	var nb_periode = temps_dernier_ecran * vitesse_simu
 	var h = nb_periode / etapes_calcul_par_ecran
 	
 	for i in range(etapes_calcul_par_ecran):

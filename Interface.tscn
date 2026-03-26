@@ -73,6 +73,7 @@ layout_mode = 2
 [node name="HSlider" type="HSlider" parent="Vbox/Control/MarginContainer2/HBoxContainer" unique_id=1423614772]
 layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxFlat_dhkvj")
+min_value = 1.0
 value = 10.0
 script = ExtResource("1_xodjk")
 
