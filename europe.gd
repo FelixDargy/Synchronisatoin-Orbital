@@ -33,7 +33,7 @@ const coefficient_dissipation: float = 4e16
 
 #variable ajustable dans l'Inspecteur pour la période orbitale des lunes
 @export_group("Paramètre de simulation")
-
+@export var periode_relative: float = 10
 const G : float = 6.673e-11
 var masse: float
 
@@ -47,7 +47,7 @@ var v2: Vector3
 var a1: Vector3
 var a2: Vector3
 
-
+var vitesse_simulation: float = interface.slider_value(10)
 
 var f_g1: Vector3
 var f_g2: Vector3
@@ -67,17 +67,10 @@ func _ready() -> void:
 	et bien positionnée
 	Toutes les formules ont été fournies dans l'énoncé pour le projet de synchronisation orbitale
 	""" 
-	if interface == null:
-		push_error("Interface non assignée !")
-		return
-	
-	if interface.slider_vitesse == null:
-		push_error("Slider non assigné dans Interface !")
-		return
-
 	
 	masse = masse_europe / 2
 	
+	interface.slider_vitesse.value = 10
 
 	r1 = Vector3(periapside-(distance_equilibre/2.0),0,0)
 	r2 = Vector3(periapside+(distance_equilibre/2.0),0,0)
@@ -102,9 +95,9 @@ func _process(delta: float) -> void:
 	if interface == null or interface.slider_vitesse == null:
 		return
 
-	var periode_relative := interface.slider_vitesse.value
+	
 
-	temps_ecoule += delta * (periode_orbitale / periode_relative)
+	temps_ecoule += delta * (vitesse_simulation)
 	if temps_ecoule >= 20.0 * periode_orbitale:
 		return
 
@@ -112,13 +105,7 @@ func _process(delta: float) -> void:
 	global_position = conv_position_reelle_a_simulee(r2)
 	lune.global_position = conv_position_reelle_a_simulee(r1)
 
-	var distance_lunes = r1.distance_to(r2)
-	interface.afficher_distance(distance_lunes)
-
-	if r1.length() < r2.length():
-		interface.afficher_plus_proche("Europe_1")
-	else:
-		interface.afficher_plus_proche("Europe_2")
+	
 
 func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	"""
@@ -135,8 +122,8 @@ func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
 	var facteur_distance_simulee = lerp(min_distance_simulee, max_distance_simulee, ratio_distance)
 	return position_reelle.normalized() * facteur_distance_simulee
 func appliquer_euler(temps_dernier_ecran : float) -> void:
-	var periode_relative := interface.slider_vitesse.value
-	var nb_periode = temps_dernier_ecran * periode_orbitale / periode_relative
+	
+	var nb_periode = temps_dernier_ecran * vitesse_simulation
 	var h = nb_periode / etapes_calcul_par_ecran
 	
 	for i in range(etapes_calcul_par_ecran):

@@ -78,7 +78,6 @@ min_distance_simulee = 50.0
 max_distance_simulee = 100.0
 min_distance_reelle = 640000000.0
 max_distance_reelle = 700000000.0
-periode_relative = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="jupiter/Europe_2" unique_id=451138490]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13, 0, 7.98)
@@ -96,8 +95,7 @@ light_color = Color(1, 0.95686275, 0.8784314, 1)
 omni_range = 4096.0
 omni_attenuation = 0.0
 
-[node name="Interface" parent="." unique_id=462005231 node_paths=PackedStringArray("lune") instance=ExtResource("2_si51w")]
-lune = NodePath("../jupiter/Europe_2")
+[node name="Interface" parent="." unique_id=462005231 instance=ExtResource("2_si51w")]
 
 [node name="HSlider" parent="Interface/Vbox/Control/MarginContainer2/HBoxContainer" parent_id_path=PackedInt32Array(462005231, 1293838178) index="2" unique_id=1423614772]
 min_value = 1.0

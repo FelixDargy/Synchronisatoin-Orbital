@@ -13,7 +13,8 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="Interface" type="Control" unique_id=462005231]
+[node name="Interface" type="Control" unique_id=462005231 node_paths=PackedStringArray("slider_vitesse")]
+layout_direction = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6lq5x")
+slider_vitesse = NodePath("Vbox/Control/MarginContainer2/HBoxContainer/HSlider")
 
 [node name="Vbox" type="VBoxContainer" parent="." unique_id=301975546]
 layout_mode = 0
