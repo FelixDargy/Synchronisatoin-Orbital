@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bwbiwpmxax3p1" path="res://europe.gd" id="2_i0uay"]
 [ext_resource type="PackedScene" uid="uid://y5em8nnyw62k" path="res://Interface.tscn" id="2_si51w"]
-[ext_resource type="Script" uid="uid://4sb5w0v723pw" path="res://distance.gd" id="3_i0uay"]
 
 [sub_resource type="Environment" id="Environment_i0uay"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -106,14 +105,13 @@ light_color = Color(1, 0.95686275, 0.8784314, 1)
 omni_range = 4096.0
 omni_attenuation = 0.0
 
-[node name="Interface" parent="." unique_id=462005231 node_paths=PackedStringArray("lune") instance=ExtResource("2_si51w")]
+[node name="Interface" parent="." unique_id=462005231 node_paths=PackedStringArray("lune", "label_proche", "label_distance") instance=ExtResource("2_si51w")]
 lune = NodePath("../jupiter/Europe_2")
+label_proche = NodePath("Vbox/Affichage/MarginContainer/GridContainer/le_plus_proche")
+label_distance = NodePath("Vbox/Affichage/MarginContainer/GridContainer/distance_entre_lune")
 
 [node name="HSlider" parent="Interface/Vbox/Control/MarginContainer2/HBoxContainer" parent_id_path=PackedInt32Array(462005231, 1293838178) index="2" unique_id=1423614772]
 max_value = 50.0
 tick_count = 1
-
-[node name="distance" parent="Interface/Vbox/Affichage/MarginContainer/GridContainer" parent_id_path=PackedInt32Array(462005231, 2028592539) index="3" unique_id=705858256]
-script = ExtResource("3_i0uay")
 
 [editable path="Interface"]

@@ -50,7 +50,7 @@ var v2: Vector3
 var a1: Vector3
 var a2: Vector3
 
-
+var distance_entre_points: Vector3
 
 var f_g1: Vector3
 var f_g2: Vector3
@@ -98,7 +98,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# appeler les fonctions qui vont être calculées à chaque delta
 	vitesse_simulation = interface.slide_value()
-	print(vitesse_simulation)
 	
 	temps_ecoule += delta * (periode_orbitale/vitesse_simulation)
 	if temps_ecoule >= 20.0 * periode_orbitale:
@@ -106,8 +105,8 @@ func _process(delta: float) -> void:
 
 	appliquer_euler(delta*vitesse_simulation)
 	position = conv_position_reelle_a_simulee(r1)
-
-
+	
+	distance_entre_points = position_entre_lunes()
 	
 
 func conv_position_reelle_a_simulee(position_reelle : Vector3) -> Vector3:
@@ -164,3 +163,11 @@ func position_r1() -> Vector3:
 	return r1
 func position_r2() -> Vector3:
 	return r2
+
+func lune_plus_proche() -> String:
+	"""fonction qui retourne lequel des deux lunes est le plus près de Jupiter"""
+	# r1 est plus proche de Jupiter si sa distance est plus petite
+	if r1.length() < r2.length():
+		return "Europe 1"
+	else:
+		return "Europe 2"
